@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gradio/3.32.0/gradio.min.js"></script>
+</head>
+<body>
+    <div id="gradio-interface"></div>
+    <script>
+        const localServerUrl = 'http://localhost:6969'; // Update this with your local server address and port
+        
+        async function loadGradioInterface() {
+            try {
+                const response = await fetch(`${localServerUrl}/config`);
+                const config = await response.json();
+                gradio.loadInterface('/Applio', '#gradio-interface', config);
+            } catch (error) {
+                console.error('Error loading Gradio interface:', error);
+                document.getElementById('gradio-interface').innerHTML = 'Error: Unable to connect to the local server. Please ensure it is running.';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadGradioInterface);
+
+        const originalFetch = window.fetch;
+        window.fetch = function(url, options) {
+            if (url.startsWith('/')) {
+                url = localServerUrl + url;
+            }
+            return originalFetch(url, options);
+        };
+    </script>
+</body>
+</html>
