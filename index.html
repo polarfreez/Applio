@@ -3,34 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🍏</text></svg>"></link>
     <title>Applio</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gradio/3.32.0/gradio.min.js"></script>
 </head>
 <body>
-    <div id="gradio-interface"></div>
-    <script>
-        const localServerUrl = 'https://100.64.163.67:6969'; // Update this with your local server address and port
-        
-        async function loadGradioInterface() {
-            try {
-                const response = await fetch(`${localServerUrl}/config`);
-                const config = await response.json();
-                gradio.loadInterface('/Applio', '#gradio-interface', config);
-            } catch (error) {
-                console.error('Error loading Gradio interface:', error);
-                document.getElementById('gradio-interface').innerHTML = 'Error: Unable to connect to the local server. Please ensure it is running.';
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', loadGradioInterface);
-
-        const originalFetch = window.fetch;
-        window.fetch = function(url, options) {
-            if (url.startsWith('/')) {
-                url = localServerUrl + url;
-            }
-            return originalFetch(url, options);
-        };
-    </script>
+    <iframe src="https://xxxx-xx-xxx-xxx-xx.ngrok.io" width="100%" height="600" frameborder="0"></iframe>
 </body>
 </html>
